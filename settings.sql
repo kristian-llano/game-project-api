@@ -1,2 +1,2 @@
-DROP DATABASE IF EXISTS <game-project-api>;
-CREATE DATABASE <game-project-api>;
+DROP DATABASE IF EXISTS game_project_api;
+CREATE DATABASE game_project_api;

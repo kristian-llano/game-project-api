@@ -6,9 +6,9 @@ class Character(models.Model):
     name = models.CharField(max_length=25)
 
     class Classes(models.TextChoices):
-        KNIGHT = 'KN', _('Knight')
-        WIZARD = 'WZ', _('Wizard')
-        RANGER = 'RG', _('Ranger')
+        KNIGHT = 'KN', ('Knight')
+        WIZARD = 'WZ', ('Wizard')
+        RANGER = 'RG', ('Ranger')
 
     character_class = models.CharField(
         max_length=2,
@@ -26,15 +26,15 @@ class Character(models.Model):
         on_delete=models.CASCADE
     )
 
-  def __str__(self):
-    # This must return a string
-      return f"The character named '{self.name}' is a level {self.level} {self.classes}."
+    def __str__(self):
+      # This must return a string
+        return f"The character named '{self.name}' is a level {self.level} {self.classes}."
 
-  def as_dict(self):
-      """Returns dictionary version of Character models"""
-      return {
-          'id': self.id,
-          'name': self.name,
-          'classes': self.classes,
-          'level': self.level
-      }
+    def as_dict(self):
+        """Returns dictionary version of Character models"""
+        return {
+            'id': self.id,
+            'name': self.name,
+            'classes': self.classes,
+            'level': self.level
+        }
