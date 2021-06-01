@@ -10,7 +10,7 @@ class Character(models.Model):
         WIZARD = 'WZ', ('Wizard')
         RANGER = 'RG', ('Ranger')
 
-    character_class = models.CharField(
+    classes = models.CharField(
         max_length=2,
         choices=Classes.choices,
         default=Classes.KNIGHT,

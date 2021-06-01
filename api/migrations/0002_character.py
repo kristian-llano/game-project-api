@@ -17,7 +17,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=25)),
-                ('character_class', models.CharField(choices=[('KN', 'Knight'), ('WZ', 'Wizard'), ('RG', 'Ranger')], default='KN', max_length=2)),
+                ('classes', models.CharField(choices=[('KN', 'Knight'), ('WZ', 'Wizard'), ('RG', 'Ranger')], default='KN', max_length=2)),
                 ('level', models.CharField(default=1, max_length=100)),
                 ('owner', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
