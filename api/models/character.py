@@ -6,9 +6,9 @@ class Character(models.Model):
     name = models.CharField(max_length=25)
 
     class Classes(models.TextChoices):
-        KNIGHT = 'KN', ('Knight')
-        WIZARD = 'WZ', ('Wizard')
-        RANGER = 'RG', ('Ranger')
+        KNIGHT = 'Knight', ('Knight')
+        WIZARD = 'Wizard', ('Wizard')
+        RANGER = 'Ranger', ('Ranger')
 
     classes = models.CharField(
         max_length=2,

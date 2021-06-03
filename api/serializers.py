@@ -9,6 +9,12 @@ class CharacterSerializer(serializers.ModelSerializer):
         model = Character
         fields = ('id', 'name', 'classes', 'level', 'owner')
 
+# class CharacterUpdateSerializer(serializers.Serializer):
+#     model = get_user_model()
+#     name = serializers.CharField(required=True)
+#     classes = serializers.CharField(required=True)
+#     level = serializers.CharField(required=True)
+
 class UserSerializer(serializers.ModelSerializer):
     # This model serializer will be used for User creation
     # The login serializer also inherits from this serializer

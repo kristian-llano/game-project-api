@@ -1,3 +1,4 @@
+import json
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.exceptions import PermissionDenied
@@ -23,10 +24,11 @@ class Characters(generics.ListCreateAPIView):
 
     def post(self, request):
         """Create request"""
+        data = json.loads(request.body)
         # Add user to request data object
-        request.data['character']['owner'] = request.user.id
+        data['character']['owner'] = request.user.id
         # Serialize/create character
-        character = CharacterSerializer(data=request.data['character'])
+        character = CharacterSerializer(data=data['character'])
         # If the character data is valid according to our serializer...
         if character.is_valid():
             # Save the created character & send a response
@@ -62,6 +64,7 @@ class CharacterDetail(generics.RetrieveUpdateDestroyAPIView):
 
     def partial_update(self, request, pk):
         """Update Request"""
+        data = json.loads(request.body)
         # Locate Character
         # get_object_or_404 returns a object representation of our Character
         character = get_object_or_404(Character, pk=pk)
@@ -70,9 +73,9 @@ class CharacterDetail(generics.RetrieveUpdateDestroyAPIView):
             raise PermissionDenied('Unauthorized, you do not own this character')
 
         # Ensure the owner field is set to the current user's ID
-        request.data['character']['owner'] = request.user.id
+        data['character']['owner'] = request.user.id
         # Validate updates with serializer
-        data = CharacterSerializer(character, data=request.data['character'], partial=True)
+        data = CharacterSerializer(character, data=data['character'], partial=True)
         if data.is_valid():
             # Save & send a 204 no content
             data.save()
