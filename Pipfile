@@ -8,6 +8,10 @@ django-rest-auth = "*"
 django-cors-headers = "*"
 python-dotenv = "*"
 dj-database-url = "*"
+gunicorn = "*"
+psycopg2-binary = "*"
+django = "*"
+whitenoise = "*"
 
 [dev-packages]
 
