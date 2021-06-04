@@ -1,4 +1,5 @@
 # from rest_framework.views import APIView
+import json
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.exceptions import PermissionDenied
@@ -19,8 +20,9 @@ class SignUp(generics.CreateAPIView):
     serializer_class = UserRegisterSerializer
 
     def post(self, request):
+        data = json.loads(request.body)
         # Pass the request data to the serializer to validate it
-        user = UserRegisterSerializer(data=request.data['credentials'])
+        user = UserRegisterSerializer(data=data['credentials'])
         # If that data is in the correct format...
         if user.is_valid():
             # Actually create the user using the UserSerializer (the `create` method defined there)
@@ -45,7 +47,8 @@ class SignIn(generics.CreateAPIView):
     serializer_class = UserSerializer
 
     def post(self, request):
-        creds = request.data['credentials']
+        data = json.loads(request.body)
+        creds = data['credentials']
         print(creds)
         # We can pass our email and password along with the request to the
         # `authenticate` method. If we had used the default user, we would need
@@ -80,9 +83,10 @@ class SignOut(generics.DestroyAPIView):
 
 class ChangePassword(generics.UpdateAPIView):
     def partial_update(self, request):
+        data = json.loads(request.body)
         user = request.user
         # Pass data through serializer
-        serializer = ChangePasswordSerializer(data=request.data['passwords'])
+        serializer = ChangePasswordSerializer(data=data['passwords'])
         if serializer.is_valid():
             # This is included with the Django base user model
             # https://docs.djangoproject.com/en/3.1/ref/contrib/auth/#django.contrib.auth.models.User.check_password
